@@ -1,0 +1,76 @@
+---
+title: "hw2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+library(tidyverse)
+library(mosaic)
+library(ggplot2)
+```
+
+### 1.1
+
+```{r}
+data <- read_csv('https://github.com/kategerasimenko/2018_hse_data_analysis/raw/master/hw2_binomial/hw2_binomial.csv')
+```
+
+```{r}
+binomial_test <- binom.test(x = data$k, n = data$n, p = data$prior)
+binomial_test
+```
+
+### 1.2
+
+```{r}
+set.seed(42)
+do(1000)*
+  sum(sample(x = 1:0, 
+             size = data$n, 
+             prob = c(data$prior, 1-data$prior), 
+             replace = TRUE)) ->
+  simulations
+simulations %>% 
+  mutate(greater = sum >= data$k) %>% 
+  count(greater) ->
+  a
+a
+```
+
+
+```{r}
+simulations %>% 
+  ggplot(aes(sum))+
+  geom_density(fill = "lightblue")+
+  geom_vline(xintercept = 42, linetype = 2)+
+  theme_bw()+
+  labs(title = "Распределение 1000 симуляций с параметрами n = 120, p = 0.42")
+```
+
+### 1.3
+
+```{r}
+alpha_prior <- data$prior * data$n
+alpha_post <- alpha_prior + data$k
+
+beta_prior <- (1-data$prior) * data$n
+beta_post <- beta_prior + (data$n - data$k)
+
+m <- alpha_post/(alpha_post+beta_post)
+m
+```
+
+### 1.4
+
+```{r}
+alpha_noninf_post <- 1 + data$k
+beta_noninf_post <- 1 + (data$n - data$k)
+m_noninf <- alpha_noninf_post/(alpha_noninf_post+beta_noninf_post)
+m_noninf
+```
+
+### 1.5
