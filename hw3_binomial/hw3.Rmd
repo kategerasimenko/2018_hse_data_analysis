@@ -7,16 +7,16 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+### 1.1
+
 ```{r, include=FALSE}
 library(tidyverse)
 library(mosaic)
 library(ggplot2)
 ```
 
-### 1.1
-
 ```{r}
-data <- read_csv('https://github.com/kategerasimenko/2018_hse_data_analysis/raw/master/hw2_binomial/hw2_binomial.csv')
+data <- read_csv('https://github.com/kategerasimenko/2018_hse_data_analysis/raw/master/hw3_binomial/hw3_binomial.csv')
 ```
 
 ```{r}

@@ -10,6 +10,8 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+### 1.1
+
 ```{r, include=FALSE}
 library(tidyverse)
 library(mosaic)
@@ -18,10 +20,8 @@ library(bootstrap)
 library(binom)
 ```
 
-### 1.1
-
 ```{r}
-data <- read_csv('https://github.com/kategerasimenko/2018_hse_data_analysis/raw/master/hw3_binomial_ci/hw3_wodehouse.csv')
+data <- read_csv('https://github.com/kategerasimenko/2018_hse_data_analysis/raw/master/hw4_binomial_ci/hw4_wodehouse.csv')
 ```
 
 ```{r}
