@@ -47,18 +47,19 @@ mca_plot
 ### 2.1
 
 ```{r}
-colors <- read_csv('https://github.com/kategerasimenko/2018_hse_data_analysis/raw/master/hw5_CA_MCA/hw5_colreg.csv')
-rownames(colors) <- c(1:11)
+colors <- read.csv('https://github.com/kategerasimenko/2018_hse_data_analysis/raw/master/hw5_CA_MCA/hw5_colreg.csv')
+rownames(colors) <- colors$colors
 ```
 
 ```{r}
-colors_ca <- ca(colors)
+colors_ca <- ca(colors[-5])
+summary(colors_ca)
 
 colors_col <- data.frame(colors_ca$colcoord)
 colors_col$rows <- rownames(colors_ca$colcoord)
 
 colors_row <- data.frame(colors_ca$rowcoord)
-colors_row$rows <- c(1:11)
+colors_row$rows <- rownames(colors_ca$rowcoord)
 
 colors_col %>% 
   ggplot(aes(Dim1, Dim2))+
@@ -70,4 +71,4 @@ colors_col %>%
 
 ### 2.2
 
-Мы провели Correspondence analysis на наших данных об употреблении цветов в текстах разных жанров в Corpus of Contemporary American English (Davies 2008 - ). Из получившихся измерений, первое объясняет 77.9% дисперсии, второе - 19.2%, третье - 2.9%. На графике первых двух измерений видно, что жанры находятся довольно далеко друг от друга. Употребление цветов наиболее близко к художественным текстам, тогда как академические тексты находятся довольно далеко от основного "цветового кластера", к этому жанру наиболее близки цвета 1 и 10. Цвет 1 находится близко к разговорным текстам, а цвета 5,6 и 9 - к прессе.
+Мы провели Correspondence analysis на наших данных об употреблении цветов в текстах разных жанров в Corpus of Contemporary American English (Davies 2008 - ). Из получившихся измерений, первое объясняет 77.9% дисперсии, второе - 19.2%, третье - 2.9%. На графике первых двух измерений видно, что жанры находятся довольно далеко друг от друга. Употребление цветов наиболее близко к художественным текстам, тогда как академические тексты находятся довольно далеко от основного "цветового кластера", к этому жанру наиболее близки черный и белый цвета. Черный цвет находится близко к разговорным текстам, а зеленый, красный и оранжевый - к прессе.
